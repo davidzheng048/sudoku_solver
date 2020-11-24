@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="sudoku_solver.css">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome to Tic Tac Toe!</h1>
+            <button id="solve" class="btn btn-primary" id="restartButton">Solve</button>
+            <button id="clear" class="btn btn-primary" id="restartButton">Clear Board</button>
+        </div>
+    </div>
+        <table align="center">
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="right-thick bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="right-thick bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="right-thick bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="right-thick bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+                <td><input type="text" maxlength="1" class="bottom-thick"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1" class="right-thick"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+                <td><input type="text" maxlength="1"></td>
+            </tr>
+
+        </table>
+
+    <script src='sudoku_solver.js'></script>
+</body>
