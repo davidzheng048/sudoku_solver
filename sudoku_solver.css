@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 td input{
     height:55px;
     width: 55px;
@@ -6,6 +10,7 @@ td input{
     font-size: 100px;
     font-size: 25px;
 }
+
 
 .right-thick {
     border-right: 2px solid black;
