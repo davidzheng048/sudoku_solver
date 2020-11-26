@@ -66,19 +66,8 @@ function solve(board) {
     return false;
 }
 
-function sudoku() {
-    var array = document.querySelectorAll('td input');
-    var puzzle = arrayToPuzzle(array);
-    var result = solve(puzzle);
-    if (result === true) {
-        alert("Puzzle solved!");
-    } else {
-        alert("Puzzle cannot be solved");
-    }
-}
 
 // ----------------------------------------------
-
 function arrayToPuzzle(array) {
     var puzzle = [];
     for (var i = 0; i < 9; i++) {
@@ -94,7 +83,16 @@ function arrayToPuzzle(array) {
 
 
 function get_dummy() {
-    var dummy = ["5","3","","","7","","","","","6","","","1","9","5","","","","","9","8","","","","","6","","8","","","","6","","","","3","4","","","8","","3","","","1","7","","","","2","","","","6","","6","","","","","2","8","","","","","4","1","9","","","5","","","","","8","","","7","9"];
+    var dummy = [
+        "5","3", "", "","7", "", "", "", "",
+        "6", "", "","1","9","5", "", "", "",
+         "","9","8", "", "", "", "","6", "",
+        "8", "", "", "","6", "", "", "","3",
+        "4", "", "","8", "","3", "", "","1",
+        "7", "", "", "","2", "", "", "","6",
+         "","6", "", "", "", "","2","8", "",
+         "", "", "","4","1","9", "", "","5",
+         "", "", "", "","8", "", "","7","9"];
     
     var inputs = document.querySelectorAll('input');
     
@@ -103,5 +101,40 @@ function get_dummy() {
     }
 }
 
+  
+function sudoku() {
+    var array = document.querySelectorAll('td input');
+    var puzzle = arrayToPuzzle(array);
+    var result = solve(puzzle);
+    if (result === true) {
+        alert("Puzzle solved!");
+    } else {
+        alert("Puzzle cannot be solved");
+    }
+}
+
+
+function clearBoard() {
+    var inputs = document.querySelectorAll('input');
+    for (i = 0; i < 81; i++) {
+        inputs[i].value = "";
+    }
+}
+
+
 $('#default').on('click', get_dummy);
 $('#solve').on('click', sudoku);
+$('#clear').on('click', clearBoard);
+
+
+// limit the input to the game board
+for (input of document.querySelectorAll('tr input')){
+    input.addEventListener('input', function(){
+        var key = this.value;
+        var regex = /[1-9]/;
+        if (!regex.test(key)){
+            this.value = "";
+        }
+
+    })
+}
