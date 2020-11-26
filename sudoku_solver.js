@@ -120,13 +120,7 @@ function clearBoard() {
         inputs[i].value = "";
     }
 }
-
-
-$('#default').on('click', get_dummy);
-$('#solve').on('click', sudoku);
-$('#clear').on('click', clearBoard);
-
-
+ 
 // limit the input to the game board
 for (input of document.querySelectorAll('tr input')){
     input.addEventListener('input', function(){
@@ -138,3 +132,8 @@ for (input of document.querySelectorAll('tr input')){
 
     })
 }
+
+
+document.querySelector('#default').addEventListener("click", get_dummy);
+document.querySelector('#solve').addEventListener("click", sudoku);
+document.querySelector('#clear').addEventListener("click", clearBoard);
