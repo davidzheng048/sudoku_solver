@@ -89,7 +89,7 @@ function arrayToPuzzle(array) {
 }
 
 
-function displayBackTracking(queue) {
+function displayBackTracking(queue, speed) {
     var inputList = document.querySelectorAll('input');
     
     var move = setInterval(function(){
@@ -99,7 +99,7 @@ function displayBackTracking(queue) {
             nextMove = queue.shift();
             inputList[nextMove[0]].value = nextMove[1];
         }
-    }, 1);
+    }, speed);
 }
  
 function solvePuzzle(solveType) {
@@ -108,8 +108,16 @@ function solvePuzzle(solveType) {
     var queue = [];
     attempt(puzzle, queue, solveType);
 
+    var speedTable = {
+        "difficultPuzzle": 1,
+        "normalPuzzle": 10,
+        "simplePuzzle": 110
+    };
+
+    var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
+
     if (solveType === "withProgress") {
-        displayBackTracking(queue);
+        displayBackTracking(queue, speed);
     }
 }
 

@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+    padding-bottom: 50px;;
 }
 
 td input{
@@ -25,4 +26,28 @@ td input{
 
 .left-boundary {
     border-left: 2px solid #696969;
+}
+
+body {
+    background-color: #D3D3D3;
+}
+
+#main {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #F8F8FF;
+    padding-bottom: 50px;
+}
+
+button {
+    margin-top: 40px;
+}
+
+#displayProcessForm{
+    padding-top: 50px;
+    padding-bottom: 30px; 
+}
+
+#displayProcessForm input {
+    margin-top: 10px;
 }

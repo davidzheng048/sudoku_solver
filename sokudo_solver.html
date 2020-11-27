@@ -6,17 +6,28 @@
     <link rel="stylesheet" href="static/sudoku_solver.css">
 </head>
 <body>
-    <div class="container">
-        <div class="jumbotron">
+    <div id="main">
+        <div class="container">
             <h1>Sudoku Solver</h1>
-            <button id="solve" class="btn btn-primary" id="restartButton">Solve Instantly</button>
-            <button id="showBackTracking" class="btn btn-primary" id="restartButton">Show Back traking</button>
-            <button id="clear" class="btn btn-primary" id="restartButton">Clear Board</button>
-            <button id="default" class="btn btn-primary" id="restartButton">Create Puzzle</button>
-        </div>
-    
-        <div id="puzzleBoard">
-
+            <div id="puzzleBoard" class="col-lg-8 col-md-8 col-sm-12 ">
+                
+            </div>
+            <div id="buttons" class="col-lg-3 col-md-3 col-sm-12">
+                <button id="default" class="btn btn-primary btn-lg btn-block">Create Puzzle</button>
+                <button id="clear" class="btn btn-primary btn-lg btn-block">Clear Board</button>
+                <button id="solve" class="btn btn-primary btn-lg btn-block">Solve Instantly</button>
+                
+                <form id="displayProcessForm">
+                    <label for="selectDisplaySpeed">Display Speed For:</label>
+                    <select class="form-control" id="selectDisplaySpeed">
+                        <option value="difficultPuzzle">Difficult Puzzle</option>
+                        <option value="normalPuzzle">Normal Puzzle</option>
+                        <option value="simplePuzzle">Simple Puzzle</option>
+                    </select>
+                    <input type="button" id="showBackTracking" class="btn btn-primary btn-lg btn-block" value="Display Solving process">
+                </form>
+                
+            </div>
         </div>
     </div>
     
