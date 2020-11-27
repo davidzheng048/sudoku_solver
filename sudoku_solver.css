@@ -6,16 +6,24 @@ td input{
     height:55px;
     width: 55px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #DCDCDC;
     font-size: 100px;
     font-size: 25px;
 }
 
 
-.right-thick {
-    border-right: 2px solid black;
+.right-boundary {
+    border-right: 2px solid #696969;
 }
 
-.bottom-thick {
-    border-bottom: 2px solid black;
+.bottom-boundary {
+    border-bottom: 2px solid #696969;
+}
+
+.top-boundary {
+    border-top: 2px solid #696969;
+}
+
+.left-boundary {
+    border-left: 2px solid #696969;
 }

@@ -106,11 +106,11 @@ function sudoku() {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
     var result = solve(puzzle);
-    if (result === true) {
-        alert("Puzzle solved!");
-    } else {
-        alert("Puzzle cannot be solved");
-    }
+    // if (result === true) {
+    //     alert("Puzzle solved!");
+    // } else {
+    //     alert("Puzzle cannot be solved");
+    // }
 }
 
 
@@ -137,3 +137,42 @@ for (input of document.querySelectorAll('tr input')){
 document.querySelector('#default').addEventListener("click", get_dummy);
 document.querySelector('#solve').addEventListener("click", sudoku);
 document.querySelector('#clear').addEventListener("click", clearBoard);
+
+
+function getClass(i, j, td) {
+    if (i == 0 || i == 6) {
+        td.classList.add("top-boundary");
+    }
+
+    if (i == 2 || i == 8) {
+        td.classList.add("bottom-boundary");
+    }
+
+    if (j == 0 || j == 6) {
+        td.classList.add("left-boundary");
+    }
+
+    if (j == 2 || j == 8) {
+        td.classList.add("right-boundary");
+    }
+}
+
+function tableCreate(){
+    var puzzleBoard = document.querySelector('#puzzleBoard');
+    var tbl  = document.createElement('table');
+    tbl.style = 'margin-left:auto; margin-right:auto; border-collapse: collapse;';
+
+    for (var i = 0; i < 9; i++) {
+        var tr = tbl.insertRow();
+        for (var j = 0; j < 9; j++) {
+            var td = tr.insertCell();
+            var input = document.createElement("input");
+            getClass(i, j, td);
+            td.appendChild(input);
+        }
+    }
+
+    puzzleBoard.appendChild(tbl);
+}
+
+tableCreate();
