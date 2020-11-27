@@ -40,7 +40,7 @@ function valid(board, num, position) {
     return true;
 }
 
-function solve(board, queue) {
+function solve(board, queue, solveType) {
     var find = findEmpty(board);
     if (find === null) {
         return true;
@@ -52,15 +52,23 @@ function solve(board, queue) {
     for (var i = 1; i < 10; i++) {
         if (valid(board, i.toString(), [row, col]) === true) {
             board[row][col] = i.toString();
-            // document.querySelectorAll('input')[row*9 + col].value = i.toString();
-            queue.push([row*9 + col, i.toString()]);
+            if (solveType === "instant") {
+                document.querySelectorAll('input')[row*9 + col].value = i.toString();
+            } else {
+                queue.push([row*9 + col, i.toString()]);
+            } 
+            
+            
 
-            if (solve(board, queue) === true) {
+            if (solve(board, queue, solveType) === true) {
                 return true;
             } else {
                 board[row][col] = "";
-                // document.querySelectorAll('input')[row*9 + col].value = "";
-                queue.push([row*9 + col, ""]);
+                if (solveType === "instant") {
+                    document.querySelectorAll('input')[row*9 + col].value = "";
+                } else {
+                    queue.push([row*9 + col, ""]);
+                }
             }
         }
     }
@@ -104,14 +112,7 @@ function get_dummy() {
 }
 
   
-function sudoku() {
-    var array = document.querySelectorAll('td input');
-    var puzzle = arrayToPuzzle(array);
-    var queue = [];
-    solve(puzzle, queue);
 
-    showBackTracking(queue);
-}
 
 
 function showBackTracking(queue) {
@@ -124,16 +125,34 @@ function showBackTracking(queue) {
             nextMove = queue.shift();
             inputList[nextMove[0]].value = nextMove[1];
         }
-    }, 0.0001);
+    }, 1);
 }
  
-// limit the input to the game board
+function solvePuzzleInstantly() {
+    var array = document.querySelectorAll('td input');
+    var puzzle = arrayToPuzzle(array);
+    var queue = [];
+    var solveType = "instant";
+    solve(puzzle, queue, solveType);
+}
+
+
+function solvePuzzleWithProgress() {
+    var array = document.querySelectorAll('td input');
+    var puzzle = arrayToPuzzle(array);
+    var queue = [];
+    var solveType = "withProgress";
+    solve(puzzle, queue, solveType);
+
+    showBackTracking(queue);
+}
 
 
 
 document.querySelector('#default').addEventListener("click", get_dummy);
-document.querySelector('#solve').addEventListener("click", sudoku);
+document.querySelector('#solve').addEventListener("click", solvePuzzleInstantly);
 document.querySelector('#clear').addEventListener("click", clearBoard);
+document.querySelector('#showBackTracking').addEventListener("click", solvePuzzleWithProgress);
 
 
 function getClass(i, j, td) {
@@ -189,7 +208,5 @@ for (input of document.querySelectorAll('input')){
         if (!regex.test(key)){
             this.value = "";
         }
-
     })
 }
-
