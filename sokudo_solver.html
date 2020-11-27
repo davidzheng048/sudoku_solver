@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/sudoku_solver.css">
+</head>
+<body>
+    <div id="main">
+        <div class="container">
+            <h1>Sudoku Solver</h1>
+            <div id="puzzleBoard" class="col-lg-8 col-md-8 col-sm-12 ">
+                
+            </div>
+            <div id="buttons" class="col-lg-3 col-md-3 col-sm-12">
+                <button id="default" class="btn btn-primary btn-lg btn-block">Create Puzzle</button>
+                <button id="clear" class="btn btn-primary btn-lg btn-block">Clear Board</button>
+                <button id="solve" class="btn btn-primary btn-lg btn-block">Solve Instantly</button>
+                
+                <form id="displayProcessForm">
+                    <label for="selectDisplaySpeed">Display Speed For:</label>
+                    <select class="form-control" id="selectDisplaySpeed">
+                        <option value="difficultPuzzle">Difficult Puzzle</option>
+                        <option value="normalPuzzle">Normal Puzzle</option>
+                        <option value="simplePuzzle">Simple Puzzle</option>
+                    </select>
+                    <input type="button" id="showBackTracking" class="btn btn-primary btn-lg btn-block" value="Display Solving process">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src='static/generate_board.js'></script>
+    <script src='static/button_utils.js'></script>
+    <script src='static/sudoku_solver.js'></script>
+</body>
