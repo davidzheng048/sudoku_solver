@@ -40,7 +40,7 @@ function valid(board, num, position) {
     return true;
 }
 
-function solve(board) {
+function solve(board, queue) {
     var find = findEmpty(board);
     if (find === null) {
         return true;
@@ -52,13 +52,15 @@ function solve(board) {
     for (var i = 1; i < 10; i++) {
         if (valid(board, i.toString(), [row, col]) === true) {
             board[row][col] = i.toString();
-            document.querySelectorAll('input')[row*9 + col].value = i.toString();
+            // document.querySelectorAll('input')[row*9 + col].value = i.toString();
+            queue.push([row*9 + col, i.toString()]);
 
-            if (solve(board) === true) {
+            if (solve(board, queue) === true) {
                 return true;
             } else {
                 board[row][col] = "";
-                document.querySelectorAll('input')[row*9 + col].value = "";
+                // document.querySelectorAll('input')[row*9 + col].value = "";
+                queue.push([row*9 + col, ""]);
             }
         }
     }
@@ -105,33 +107,28 @@ function get_dummy() {
 function sudoku() {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
-    var result = solve(puzzle);
-    // if (result === true) {
-    //     alert("Puzzle solved!");
-    // } else {
-    //     alert("Puzzle cannot be solved");
-    // }
+    var queue = [];
+    solve(puzzle, queue);
+
+    showBackTracking(queue);
 }
 
 
-function clearBoard() {
-    var inputs = document.querySelectorAll('input');
-    for (i = 0; i < 81; i++) {
-        inputs[i].value = "";
-    }
+function showBackTracking(queue) {
+    var inputList = document.querySelectorAll('input');
+    
+    var move = setInterval(function(){
+        if (queue.length === 0) {
+            clearInterval(move)
+        } else {
+            nextMove = queue.shift();
+            inputList[nextMove[0]].value = nextMove[1];
+        }
+    }, 0.0001);
 }
  
 // limit the input to the game board
-for (input of document.querySelectorAll('tr input')){
-    input.addEventListener('input', function(){
-        var key = this.value;
-        var regex = /[1-9]/;
-        if (!regex.test(key)){
-            this.value = "";
-        }
 
-    })
-}
 
 
 document.querySelector('#default').addEventListener("click", get_dummy);
@@ -157,6 +154,13 @@ function getClass(i, j, td) {
     }
 }
 
+function clearBoard() {
+    var inputs = document.querySelectorAll('input');
+    for (i = 0; i < 81; i++) {
+        inputs[i].value = "";
+    }
+}
+
 function tableCreate(){
     var puzzleBoard = document.querySelector('#puzzleBoard');
     var tbl  = document.createElement('table');
@@ -167,6 +171,7 @@ function tableCreate(){
         for (var j = 0; j < 9; j++) {
             var td = tr.insertCell();
             var input = document.createElement("input");
+            input.setAttribute("maxlength", "1");
             getClass(i, j, td);
             td.appendChild(input);
         }
@@ -176,3 +181,15 @@ function tableCreate(){
 }
 
 tableCreate();
+
+for (input of document.querySelectorAll('input')){
+    input.addEventListener('input', function(){
+        var key = this.value;
+        var regex = /[1-9]/;
+        if (!regex.test(key)){
+            this.value = "";
+        }
+
+    })
+}
+
