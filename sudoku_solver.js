@@ -7,7 +7,6 @@ function findEmpty(board) {
             }
         }
     }
-
     return null
 }
 
@@ -36,11 +35,11 @@ function valid(board, num, position) {
             } 
         }
     }
-
     return true;
 }
 
-function solve(board, queue, solveType) {
+
+function attempt(board, queue, solveType) {
     var find = findEmpty(board);
     if (find === null) {
         return true;
@@ -58,9 +57,7 @@ function solve(board, queue, solveType) {
                 queue.push([row*9 + col, i.toString()]);
             } 
             
-            
-
-            if (solve(board, queue, solveType) === true) {
+            if (attempt(board, queue, solveType) === true) {
                 return true;
             } else {
                 board[row][col] = "";
@@ -72,12 +69,12 @@ function solve(board, queue, solveType) {
             }
         }
     }
-
     return false;
 }
-
-
+// back tracking algorithm ends here
 // ----------------------------------------------
+
+
 function arrayToPuzzle(array) {
     var puzzle = [];
     for (var i = 0; i < 9; i++) {
@@ -92,30 +89,7 @@ function arrayToPuzzle(array) {
 }
 
 
-function get_dummy() {
-    var dummy = [
-        "5","3", "", "","7", "", "", "", "",
-        "6", "", "","1","9","5", "", "", "",
-         "","9","8", "", "", "", "","6", "",
-        "8", "", "", "","6", "", "", "","3",
-        "4", "", "","8", "","3", "", "","1",
-        "7", "", "", "","2", "", "", "","6",
-         "","6", "", "", "", "","2","8", "",
-         "", "", "","4","1","9", "", "","5",
-         "", "", "", "","8", "", "","7","9"];
-    
-    var inputs = document.querySelectorAll('input');
-    
-    for (i = 0; i < 81; i++) {
-        inputs[i].value = dummy[i];
-    }
-}
-
-  
-
-
-
-function showBackTracking(queue) {
+function displayBackTracking(queue) {
     var inputList = document.querySelectorAll('input');
     
     var move = setInterval(function(){
@@ -128,85 +102,22 @@ function showBackTracking(queue) {
     }, 1);
 }
  
-function solvePuzzleInstantly() {
+function solvePuzzle(solveType) {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
     var queue = [];
-    var solveType = "instant";
-    solve(puzzle, queue, solveType);
-}
+    attempt(puzzle, queue, solveType);
 
-
-function solvePuzzleWithProgress() {
-    var array = document.querySelectorAll('td input');
-    var puzzle = arrayToPuzzle(array);
-    var queue = [];
-    var solveType = "withProgress";
-    solve(puzzle, queue, solveType);
-
-    showBackTracking(queue);
-}
-
-
-
-document.querySelector('#default').addEventListener("click", get_dummy);
-document.querySelector('#solve').addEventListener("click", solvePuzzleInstantly);
-document.querySelector('#clear').addEventListener("click", clearBoard);
-document.querySelector('#showBackTracking').addEventListener("click", solvePuzzleWithProgress);
-
-
-function getClass(i, j, td) {
-    if (i == 0 || i == 6) {
-        td.classList.add("top-boundary");
-    }
-
-    if (i == 2 || i == 8) {
-        td.classList.add("bottom-boundary");
-    }
-
-    if (j == 0 || j == 6) {
-        td.classList.add("left-boundary");
-    }
-
-    if (j == 2 || j == 8) {
-        td.classList.add("right-boundary");
+    if (solveType === "withProgress") {
+        displayBackTracking(queue);
     }
 }
 
-function clearBoard() {
-    var inputs = document.querySelectorAll('input');
-    for (i = 0; i < 81; i++) {
-        inputs[i].value = "";
-    }
-}
 
-function tableCreate(){
-    var puzzleBoard = document.querySelector('#puzzleBoard');
-    var tbl  = document.createElement('table');
-    tbl.style = 'margin-left:auto; margin-right:auto; border-collapse: collapse;';
+document.querySelector('#solve').addEventListener("click", function(){
+    solvePuzzle("instant")
+});
 
-    for (var i = 0; i < 9; i++) {
-        var tr = tbl.insertRow();
-        for (var j = 0; j < 9; j++) {
-            var td = tr.insertCell();
-            var input = document.createElement("input");
-            input.setAttribute("maxlength", "1");
-            getClass(i, j, td);
-            td.appendChild(input);
-        }
-    }
-
-    puzzleBoard.appendChild(tbl);
-}
-
-tableCreate();
-
-for (input of document.querySelectorAll('input')){
-    input.addEventListener('input', function(){
-        var key = this.value;
-        var regex = /[1-9]/;
-        if (!regex.test(key)){
-            this.value = "";
-        }
-    })
-}
+document.querySelector('#showBackTracking').addEventListener("click", function(){
+    solvePuzzle("withProgress")
+});
