@@ -115,9 +115,10 @@ function solvePuzzle(solveType) {
     attempt(puzzle, queue, solveType);
 
     var speedTable = {
-        "difficultPuzzle": 1,
-        "normalPuzzle": 10,
-        "simplePuzzle": 110
+        "1000/s": 1,
+        "100/s": 10,
+        "10/s": 100,
+        "1/s": 500
     };
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
