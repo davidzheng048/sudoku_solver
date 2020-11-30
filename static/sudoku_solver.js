@@ -91,7 +91,14 @@ function arrayToPuzzle(array) {
 
 function displayBackTracking(queue, speed) {
     var inputList = document.querySelectorAll('input');
+    var progressBar = document.getElementById("progressBar");
     
+    qLength = queue.length;
+    var steps = 0;
+
+    document.querySelector("#progressBackground").style.display = "block";
+    document.querySelector("#progressBar").style.display = "block";
+
     var move = setInterval(function(){
         if (queue.length === 0) {
             clearInterval(move)
@@ -103,6 +110,11 @@ function displayBackTracking(queue, speed) {
         } else {
             nextMove = queue.shift();
             inputList[nextMove[0]].value = nextMove[1];
+            steps++;
+
+            progressBar.style.width = (steps/qLength * 100).toString() + "%";
+            console.log(steps);
+            console.log(qLength);
         }
     }, speed);
 }
@@ -140,3 +152,6 @@ document.querySelector('#solve').addEventListener("click", function(){
 document.querySelector('#showBackTracking').addEventListener("click", function(){
     solvePuzzle("withProgress")
 });
+
+document.querySelector("#progressBackground").style.display = "none";
+document.querySelector("#progressBar").style.display = "none";

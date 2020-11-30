@@ -25,6 +25,10 @@ td input{
     color: #696969;
 }
 
+#puzzleBoard {
+    margin-bottom: 15px;
+} 
+
 input:focus{
     outline: 2px solid #D3D3D3;
     background-color: #F5F5DC;
@@ -49,13 +53,13 @@ input:focus{
 body {
     margin-left: 10%;
     margin-right: 10%;
-    background-color: #F8F8FF;
+    background-color: #FFFAFA;
     margin-bottom: 10%;
     margin-top: 7rem;
 }
 
 button {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 #displayProcessForm{
@@ -66,3 +70,14 @@ button {
 #displayProcessForm input {
     margin-top: 10px;
 }
+
+#progressBackground {
+    width: 100%;
+    background-color: #DCDCDC;
+  }
+
+#progressBar {
+    width: 0%;
+    height: 5px;
+    background-color: #696969;
+  }
