@@ -3,6 +3,9 @@ function clearBoard() {
     for (i = 0; i < 81; i++) {
         inputs[i].value = "";
     }
+
+    document.querySelector("#progressBackground").style.display = "none";
+    document.querySelector("#progressBar").style.display = "none";
 }
 
 

@@ -91,13 +91,28 @@ function arrayToPuzzle(array) {
 
 function displayBackTracking(queue, speed) {
     var inputList = document.querySelectorAll('input');
+    var progressBar = document.getElementById("progressBar");
     
+    qLength = queue.length;
+    var steps = 0;
+
+    document.querySelector("#progressBackground").style.display = "block";
+    document.querySelector("#progressBar").style.display = "block";
+
     var move = setInterval(function(){
         if (queue.length === 0) {
             clearInterval(move)
+            
+            document.querySelector("#clear").disabled = false;
+            document.querySelector("#default").disabled = false;
+            document.querySelector("#solve").disabled = false;
+
         } else {
             nextMove = queue.shift();
             inputList[nextMove[0]].value = nextMove[1];
+            steps++;
+
+            progressBar.style.width = (steps/qLength * 100).toString() + "%";
         }
     }, speed);
 }
@@ -106,17 +121,23 @@ function solvePuzzle(solveType) {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
     var queue = [];
+
     attempt(puzzle, queue, solveType);
 
     var speedTable = {
-        "difficultPuzzle": 1,
-        "normalPuzzle": 10,
-        "simplePuzzle": 110
+        "1000/s": 1,
+        "100/s": 10,
+        "10/s": 100,
+        "1/s": 500
     };
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
-
+    
     if (solveType === "withProgress") {
+        document.querySelector("#default").disabled = true;
+        document.querySelector("#clear").disabled = true;
+        document.querySelector("#solve").disabled = true;
+
         displayBackTracking(queue, speed);
     }
 }
@@ -129,3 +150,6 @@ document.querySelector('#solve').addEventListener("click", function(){
 document.querySelector('#showBackTracking').addEventListener("click", function(){
     solvePuzzle("withProgress")
 });
+
+document.querySelector("#progressBackground").style.display = "none";
+document.querySelector("#progressBar").style.display = "none";
