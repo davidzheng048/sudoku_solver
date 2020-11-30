@@ -95,6 +95,11 @@ function displayBackTracking(queue, speed) {
     var move = setInterval(function(){
         if (queue.length === 0) {
             clearInterval(move)
+            
+            document.querySelector("#clear").classList.remove("disabled");
+            document.querySelector("#default").classList.remove("disabled");
+            document.querySelector("#solve").classList.remove("disabled");
+
         } else {
             nextMove = queue.shift();
             inputList[nextMove[0]].value = nextMove[1];
@@ -106,6 +111,7 @@ function solvePuzzle(solveType) {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
     var queue = [];
+
     attempt(puzzle, queue, solveType);
 
     var speedTable = {
@@ -115,8 +121,12 @@ function solvePuzzle(solveType) {
     };
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
-
+    
     if (solveType === "withProgress") {
+        document.querySelector("#default").classList.add("disabled");
+        document.querySelector("#clear").classList.add("disabled");
+        document.querySelector("#solve").classList.add("disabled");
+
         displayBackTracking(queue, speed);
     }
 }
