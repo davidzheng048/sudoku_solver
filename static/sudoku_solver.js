@@ -103,9 +103,9 @@ function displayBackTracking(queue, speed) {
         if (queue.length === 0) {
             clearInterval(move)
             
-            document.querySelector("#clear").classList.remove("disabled");
-            document.querySelector("#default").classList.remove("disabled");
-            document.querySelector("#solve").classList.remove("disabled");
+            document.querySelector("#clear").disabled = false;
+            document.querySelector("#default").disabled = false;
+            document.querySelector("#solve").disabled = false;
 
         } else {
             nextMove = queue.shift();
@@ -113,8 +113,6 @@ function displayBackTracking(queue, speed) {
             steps++;
 
             progressBar.style.width = (steps/qLength * 100).toString() + "%";
-            console.log(steps);
-            console.log(qLength);
         }
     }, speed);
 }
@@ -136,9 +134,9 @@ function solvePuzzle(solveType) {
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
     
     if (solveType === "withProgress") {
-        document.querySelector("#default").classList.add("disabled");
-        document.querySelector("#clear").classList.add("disabled");
-        document.querySelector("#solve").classList.add("disabled");
+        document.querySelector("#default").disabled = true;
+        document.querySelector("#clear").disabled = true;
+        document.querySelector("#solve").disabled = true;
 
         displayBackTracking(queue, speed);
     }
