@@ -108,11 +108,24 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#solve").disabled = false;
 
         } else {
-            nextMove = queue.shift();
-            inputList[nextMove[0]].value = nextMove[1];
-            steps++;
 
-            progressBar.style.width = (steps/qLength * 100).toString() + "%";
+            // For some reason when speed === 1, setInterval doesn't work as fast as 1 step/ms
+            // So I put a for loop inside when speed === 1, to make the setInterval run faster
+            if (speed === 1) {
+                for (i = 0; i < 4; i++) {
+                    nextMove = queue.shift();
+                    inputList[nextMove[0]].value = nextMove[1];
+                    steps++;
+    
+                    progressBar.style.width = (steps/qLength * 100).toString() + "%";
+                }            
+            } else {
+                nextMove = queue.shift();
+                inputList[nextMove[0]].value = nextMove[1];
+                steps++;
+
+                progressBar.style.width = (steps/qLength * 100).toString() + "%";
+            }
         }
     }, speed);
 }
@@ -128,7 +141,7 @@ function solvePuzzle(solveType) {
         "1000/s": 1,
         "100/s": 10,
         "10/s": 100,
-        "1/s": 500
+        "1/s": 1000
     };
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
