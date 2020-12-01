@@ -107,6 +107,7 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#default").disabled = false;
             document.querySelector("#solve").disabled = false;
 
+            setTimeout("alert('Puzzle Solved');", 1);
         } else {
 
             // For some reason when speed === 1, setInterval doesn't work as fast as 1 step/ms
@@ -115,15 +116,15 @@ function displayBackTracking(queue, speed) {
                 for (i = 0; i < 4; i++) {
                     nextMove = queue.shift();
                     inputList[nextMove[0]].value = nextMove[1];
+
                     steps++;
-    
                     progressBar.style.width = (steps/qLength * 100).toString() + "%";
                 }            
             } else {
                 nextMove = queue.shift();
                 inputList[nextMove[0]].value = nextMove[1];
+                
                 steps++;
-
                 progressBar.style.width = (steps/qLength * 100).toString() + "%";
             }
         }
@@ -135,7 +136,7 @@ function solvePuzzle(solveType) {
     var puzzle = arrayToPuzzle(array);
     var queue = [];
 
-    attempt(puzzle, queue, solveType);
+    var result = attempt(puzzle, queue, solveType);
 
     var speedTable = {
         "1000/s": 1,
@@ -146,12 +147,25 @@ function solvePuzzle(solveType) {
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
     
-    if (solveType === "withProgress") {
-        document.querySelector("#default").disabled = true;
-        document.querySelector("#clear").disabled = true;
-        document.querySelector("#solve").disabled = true;
+    if (solveType === "instant") {
+        if (result) {
+            setTimeout("alert('Puzzle Solved');", 1);
+        } else {
+            setTimeout("alert('Puzzle is unsolvable');", 1);
+        }
+    }
 
-        displayBackTracking(queue, speed);
+    if (solveType === "withProgress") {
+        if (result) {
+            document.querySelector("#default").disabled = true;
+            document.querySelector("#clear").disabled = true;
+            document.querySelector("#solve").disabled = true;
+
+            displayBackTracking(queue, speed);
+        } else {
+            setTimeout("alert('Puzzle is unsolvable');", 1);
+        }
+        
     }
 }
 
