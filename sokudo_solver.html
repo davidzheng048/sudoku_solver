@@ -5,6 +5,7 @@
     <title>Sudoku Solver</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="static/sudoku_solver.css">
+    <link rel="shortcut icon" href="static/favicon.ico">
 </head>
 <body>
     
@@ -24,25 +25,34 @@
                 </div>
             </div>
             <div id="buttons" class="col-lg-3 col-md-2 col-sm-12 col-xs-12">
-                <button id="default" class="btn btn-secondary btn-block">Create Puzzle</button>
+                <button id="default" class="btn btn-secondary btn-block">Create Sample Puzzle</button>
                 <button id="clear" class="btn btn-secondary btn-block">Clear Board</button>
                 <button id="solve" class="btn btn-secondary btn-block">Solve Instantly</button>
                 
                 <form id="displayProcessForm">
                     <label for="selectDisplaySpeed">Display Speed:</label>
                     <select class="form-control" id="selectDisplaySpeed">
-                        <option value="1000/s">1000 steps per second</option>
-                        <option value="100/s">100 steps per second</option>
-                        <option value="10/s">10 steps per second </option>
-                        <option value="1/s">2 step per second</option>
+                        <option value="1000/s">About 1000 steps/s</option>
+                        <option value="100/s">About 100 steps/s</option>
+                        <option value="10/s">About 10 steps/s</option>
+                        <option value="1/s">About 1 step/s</option>
                     </select>
-                    <input type="button" id="showBackTracking" class="btn btn-secondary btn-lg btn-block" value="Display Solving process">
+                    <input type="button" id="showBackTracking" class="btn btn-secondary btn-lg btn-block" value="Display Solving Process">
                 </form>
-                
             </div>
+        </div>
+        <div id="descriptionArea">
+            <h2>What is this?</h2>
+            <p>This is a web page that can solve sudoku by using a backtracking algorithm. It can also display the process of solving the sudoku puzzle.</p>
+            <h2>How to use it?</h2>
+            <p>If you want to solve the sudoku puzzle instantly, you can fill in the Sudoku puzzle and click the "Solve Instantly" button. As long as it is solvable, the result will appear within a second.<br><br>
+                You can also see the backtracking process by selecting the display speed and click the "Display Solving Process" button. For a medium level Sudoku puzzle, it usually takes about 10 seconds by the processing speed of 1000 steps per second. The difficulty of the puzzle won't affect the performance of the "Solve Instantly" function, but a very difficult puzzle might cause the browser to crash if you click "Display Solving Process".
+            </p>
+            <p>You can generate a Sudoku puzzle by clicking the "Create Sample Puzzle" button. The generated puzzle is hardcoded at the moment. I might add a feature to generate random puzzles in the future.</p>
+            <h2>About this project</h2>
+            <p>You can find the code of this page <a href="https://github.com/BuddyLich/sudoku_solver">here</a>. If you find any issue or have any suggestion, feel free to contact me through Github or <a href="buddylich048@gmail.com">Email</a>.</p>  
+        </div>
     </div>
-    </div>
-    
     <script src='static/generate_board.js'></script>
     <script src='static/button_utils.js'></script>
     <script src='static/sudoku_solver.js'></script>

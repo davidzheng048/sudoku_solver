@@ -30,7 +30,7 @@ function valid(board, num, position) {
     
     for (var i = box_y*3; i < box_y*3 + 3; i++) {
         for (var j = box_x*3; j < box_x*3 + 3; j++) {
-            if (board[i][j] === num && position !== [i, j]) {
+            if (board[i][j] === num && (position[0] !== i || position[1] !== j)) {
                 return false;
             } 
         }
@@ -38,6 +38,17 @@ function valid(board, num, position) {
     return true;
 }
 
+function validPuzzle(board) {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            if (board[i][j] !== "" && (!valid(board, board[i][j], [i, j]))) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
 
 function attempt(board, queue, solveType) {
     var find = findEmpty(board);
@@ -106,13 +117,28 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#clear").disabled = false;
             document.querySelector("#default").disabled = false;
             document.querySelector("#solve").disabled = false;
+            document.querySelector("#showBackTracking").disabled = false;
 
+            setTimeout("alert('Puzzle Solved');", 1);
         } else {
-            nextMove = queue.shift();
-            inputList[nextMove[0]].value = nextMove[1];
-            steps++;
 
-            progressBar.style.width = (steps/qLength * 100).toString() + "%";
+            // For some reason when speed === 1, setInterval doesn't work as fast as 1 step/ms
+            // So I put a for loop inside when speed === 1, to make the setInterval run faster
+            if (speed === 1) {
+                for (i = 0; i < 4; i++) {
+                    nextMove = queue.shift();
+                    inputList[nextMove[0]].value = nextMove[1];
+
+                    steps++;
+                    progressBar.style.width = (steps/qLength * 100).toString() + "%";
+                }            
+            } else {
+                nextMove = queue.shift();
+                inputList[nextMove[0]].value = nextMove[1];
+                
+                steps++;
+                progressBar.style.width = (steps/qLength * 100).toString() + "%";
+            }
         }
     }, speed);
 }
@@ -120,25 +146,45 @@ function displayBackTracking(queue, speed) {
 function solvePuzzle(solveType) {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
+
+    if (!validPuzzle(puzzle)) {
+        setTimeout("alert('Puzzle is unsolvable');", 1);
+        return false;
+    }
+
     var queue = [];
 
-    attempt(puzzle, queue, solveType);
+    var result = attempt(puzzle, queue, solveType);
 
     var speedTable = {
         "1000/s": 1,
         "100/s": 10,
         "10/s": 100,
-        "1/s": 500
+        "1/s": 1000
     };
 
     var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
     
-    if (solveType === "withProgress") {
-        document.querySelector("#default").disabled = true;
-        document.querySelector("#clear").disabled = true;
-        document.querySelector("#solve").disabled = true;
+    if (solveType === "instant") {
+        if (result) {
+            setTimeout("alert('Puzzle Solved');", 1);
+        } else {
+            setTimeout("alert('Puzzle is unsolvable');", 1);
+        }
+    }
 
-        displayBackTracking(queue, speed);
+    if (solveType === "withProgress") {
+        if (result) {
+            document.querySelector("#default").disabled = true;
+            document.querySelector("#clear").disabled = true;
+            document.querySelector("#solve").disabled = true;
+            document.querySelector("#showBackTracking").disabled = true;
+
+            displayBackTracking(queue, speed);
+        } else {
+            setTimeout("alert('Puzzle is unsolvable');", 1);
+        }
+        
     }
 }
 
