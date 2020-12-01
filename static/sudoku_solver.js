@@ -117,6 +117,7 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#clear").disabled = false;
             document.querySelector("#default").disabled = false;
             document.querySelector("#solve").disabled = false;
+            document.querySelector("#showBackTracking").disabled = false;
 
             setTimeout("alert('Puzzle Solved');", 1);
         } else {
@@ -177,6 +178,7 @@ function solvePuzzle(solveType) {
             document.querySelector("#default").disabled = true;
             document.querySelector("#clear").disabled = true;
             document.querySelector("#solve").disabled = true;
+            document.querySelector("#showBackTracking").disabled = true;
 
             displayBackTracking(queue, speed);
         } else {
