@@ -74,10 +74,17 @@ button {
 #progressBackground {
     width: 100%;
     background-color: #DCDCDC;
-  }
+}
 
 #progressBar {
     width: 0%;
     height: 5px;
     background-color: #696969;
-  }
+ }
+
+#descriptionArea {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 4%;
+    padding-right: 4%;
+}

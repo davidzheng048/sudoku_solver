@@ -30,7 +30,7 @@ function valid(board, num, position) {
     
     for (var i = box_y*3; i < box_y*3 + 3; i++) {
         for (var j = box_x*3; j < box_x*3 + 3; j++) {
-            if (board[i][j] === num && position !== [i, j]) {
+            if (board[i][j] === num && (position[0] !== i || position[1] !== j)) {
                 return false;
             } 
         }
@@ -38,6 +38,17 @@ function valid(board, num, position) {
     return true;
 }
 
+function validPuzzle(board) {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            if (board[i][j] !== "" && (!valid(board, board[i][j], [i, j]))) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
 
 function attempt(board, queue, solveType) {
     var find = findEmpty(board);
@@ -134,6 +145,12 @@ function displayBackTracking(queue, speed) {
 function solvePuzzle(solveType) {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
+
+    if (!validPuzzle(puzzle)) {
+        setTimeout("alert('Puzzle is unsolvable');", 1);
+        return false;
+    }
+
     var queue = [];
 
     var result = attempt(puzzle, queue, solveType);
