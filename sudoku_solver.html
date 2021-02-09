@@ -27,8 +27,9 @@
             <div id="buttons" class="col-lg-3 col-md-2 col-sm-12 col-xs-12">
                 <button id="default" class="btn btn-secondary btn-block">Create Sample Puzzle</button>
                 <button id="clear" class="btn btn-secondary btn-block">Clear Board</button>                    
-                <button id="solve" class="btn btn-secondary btn-block">Display Process</button>
+                
                 <div class="range-container">
+                    <button id="solve" class="btn btn-secondary btn-block">Display Process</button>
                     <label for="range">Solve Speed:</label>
                     <input type="range" id="range" min="1" max="5"> 
                 </div>
@@ -37,14 +38,11 @@
         </div>
         <div id="descriptionArea">
             <h2>What is this?</h2>
-            <p>This is a web page that solves sudoku puzzle by using a backtracking algorithm. You can choose to solve the puzzle instantly or watch the backtracking process within a few seconds.</p>
-            <h2>How to use it?</h2>
-            <p>If you want to solve the sudoku puzzle instantly, you can fill in the Sudoku puzzle and click the "Solve Instantly" button. As long as it is solvable, the result will appear within a second.<br><br>
-                You can also see the backtracking process by selecting the display speed and click the "Display Solving Process" button. For a medium level Sudoku puzzle, it usually takes about 10 seconds by the processing speed of 1000 steps per second. The difficulty of the puzzle won't affect the performance of the "Solve Instantly" function, but a very difficult puzzle might cause the browser to crash if you click "Display Solving Process".
-            </p>
-            <p>You can generate a Sudoku puzzle by clicking the "Create Sample Puzzle" button. The generated puzzle is hardcoded at the moment. I might add a feature to generate random puzzles in the future.</p>
+            <p>This is a web page that solves sudoku puzzle by using a backtracking algorithm. You can also choose the speed of the solving process.</p>
+
+            <p>You can generate a Sudoku puzzle by clicking the "Create Sample Puzzle" button. The generated puzzle is hardcoded at the moment.</p>
             <h2>About this project</h2>
-            <p>You can find the code of this page <a href="https://github.com/BuddyLich/sudoku_solver">here</a>. If you find any issue or have any suggestion, feel free to contact me through Github or <a href="mailto:buddylich048@gmail.com">Email</a>.</p>  
+            <p>You can find the code of this page <a href="https://github.com/BuddyLich/sudoku_solver">here</a>. If you find any issue or have any suggestion, feel free to contact me through Github or <a href="mailto:davidzheng048@gmail.com">Email</a>.</p>  
         </div>
     </div>
     <script src='static/generate_board.js'></script>

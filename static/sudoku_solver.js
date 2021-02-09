@@ -117,8 +117,11 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#clear").disabled = false;
             document.querySelector("#default").disabled = false;
             document.querySelector("#solve").disabled = false;
+            document.querySelector("#range").disabled = false;
 
-            setTimeout("alert('Puzzle Solved');", 1);
+            setTimeout(() => {
+                alert('Puzzle Solved!');
+            }, 200);
         } else {
 
             // For some reason when speed === 1, setInterval doesn't work as fast as 1 step/ms
@@ -148,7 +151,7 @@ function solvePuzzle() {
     var puzzle = arrayToPuzzle(array);
 
     if (!validPuzzle(puzzle)) {
-        setTimeout("alert('Puzzle is unsolvable');", 1);
+        alert('Puzzle is unsolvable!');
         return false;
     }
 
@@ -180,9 +183,11 @@ function solvePuzzle() {
 
     if (solveType === "instant") {
         if (result) {
-            setTimeout("alert('Puzzle Solved');", 1);
+            setTimeout(() => {
+                alert('Puzzle Solved!');
+            }, 200);
         } else {
-            setTimeout("alert('Puzzle is unsolvable');", 1);
+            alert('Puzzle is unsolvable!');
         }
     }
 
@@ -191,11 +196,12 @@ function solvePuzzle() {
             document.querySelector("#default").disabled = true;
             document.querySelector("#clear").disabled = true;
             document.querySelector("#solve").disabled = true;
+            document.querySelector("#range").disabled = true;
 
             displayBackTracking(queue, speed);
 
         } else {
-            setTimeout("alert('Puzzle is unsolvable');", 1);
+            alert('Puzzle is unsolvable!');
         }
         
     }
