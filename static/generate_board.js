@@ -28,6 +28,7 @@ function tableCreate(){
             var td = tr.insertCell();
             var input = document.createElement("input");
             input.setAttribute("maxlength", "1");
+            input.setAttribute('type', 'tel');
             getClass(i, j, td);
             td.appendChild(input);
         }
@@ -40,7 +41,7 @@ tableCreate();
 
 // After creating puzzle board then put limit on input
 for (input of document.querySelectorAll('input')){
-    input.addEventListener('input', function(){
+    input.addEventListener('input', () => {
         var key = this.value;
         var regex = /[1-9]/;
         if (!regex.test(key)){
