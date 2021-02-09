@@ -117,15 +117,17 @@ function displayBackTracking(queue, speed) {
             document.querySelector("#clear").disabled = false;
             document.querySelector("#default").disabled = false;
             document.querySelector("#solve").disabled = false;
-            document.querySelector("#showBackTracking").disabled = false;
+            document.querySelector("#range").disabled = false;
 
-            setTimeout("alert('Puzzle Solved');", 1);
+            setTimeout(() => {
+                alert('Puzzle Solved!');
+            }, 200);
         } else {
 
             // For some reason when speed === 1, setInterval doesn't work as fast as 1 step/ms
             // So I put a for loop inside when speed === 1, to make the setInterval run faster
-            if (speed === 1) {
-                for (i = 0; i < 4; i++) {
+            if (speed !== 1000) {
+                for (i = 0; i < 10; i++) {
                     nextMove = queue.shift();
                     inputList[nextMove[0]].value = nextMove[1];
 
@@ -142,60 +144,71 @@ function displayBackTracking(queue, speed) {
         }
     }, speed);
 }
- 
-function solvePuzzle(solveType) {
+
+
+function solvePuzzle() {
     var array = document.querySelectorAll('td input');
     var puzzle = arrayToPuzzle(array);
 
     if (!validPuzzle(puzzle)) {
-        setTimeout("alert('Puzzle is unsolvable');", 1);
+        alert('Puzzle is unsolvable!');
         return false;
     }
+
+    var solveType;
+
+    var selectedSpeed = document.querySelector('#range').value;
+
+    if (selectedSpeed === "5") {
+        solveType = "instant";
+    } else {
+        solveType = "withProcess";
+    }
+
 
     var queue = [];
 
     var result = attempt(puzzle, queue, solveType);
+       
 
     var speedTable = {
-        "1000/s": 1,
-        "100/s": 10,
-        "10/s": 100,
-        "1/s": 1000
+        "1": 1000,
+        "2": 100,
+        "3": 10,
+        "4": 1,
     };
 
-    var speed = speedTable[document.querySelector("#selectDisplaySpeed").value];
-    
+    var speed = speedTable[selectedSpeed];
+        
+
     if (solveType === "instant") {
         if (result) {
-            setTimeout("alert('Puzzle Solved');", 1);
+            setTimeout(() => {
+                alert('Puzzle Solved!');
+            }, 200);
         } else {
-            setTimeout("alert('Puzzle is unsolvable');", 1);
+            alert('Puzzle is unsolvable!');
         }
     }
 
-    if (solveType === "withProgress") {
+    if (solveType === "withProcess") {
         if (result) {
             document.querySelector("#default").disabled = true;
             document.querySelector("#clear").disabled = true;
             document.querySelector("#solve").disabled = true;
-            document.querySelector("#showBackTracking").disabled = true;
+            document.querySelector("#range").disabled = true;
 
             displayBackTracking(queue, speed);
+
         } else {
-            setTimeout("alert('Puzzle is unsolvable');", 1);
+            alert('Puzzle is unsolvable!');
         }
         
     }
 }
 
 
-document.querySelector('#solve').addEventListener("click", function(){
-    solvePuzzle("instant")
-});
-
-document.querySelector('#showBackTracking').addEventListener("click", function(){
-    solvePuzzle("withProgress")
-});
+document.querySelector('#solve').addEventListener("click", solvePuzzle);
 
 document.querySelector("#progressBackground").style.display = "none";
 document.querySelector("#progressBar").style.display = "none";
