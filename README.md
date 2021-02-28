@@ -23,6 +23,18 @@ So I was thinking, "Why don't I make a Sudoku Solver website, and display the pr
 I spent some time studying the DOM manipulation and the `setInterval()` function in JavaScript. Then I pieced them together, and created this Sudoku Solver.
 
 
+## How does it work:
+1. First when the html page is loaded, it will import the `generate_board.js`, generate the 9x9 sudoku board.
+
+2. Then, import the `button_utils.js`, add eventListener to the buttons on the page.
+
+3. Before using the Backtracking algorithm solving puzzle, it will look at the puzzle and make sure it is valid and solvable.
+
+4. After the Backtracking starts, every move of the algorithm will be appended into a queue.
+
+5. When the Backtracking is completed, the moves will be poped from the queue once a time. Then a function will take these move as argument, and manipulate the DOM object. This is the actual process displaying the solving process. 
+
+
 ## What's next:
 
 Since I didn't do much on the design, this page kinda looks ugly, especially the range slider.
